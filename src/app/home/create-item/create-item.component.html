@@ -1,0 +1,43 @@
+<div class="container-fluid new-item-wrapper">
+  <form>
+    <div class="form-group">
+      <label>Sprint Id</label>
+      <input #sprintId type="text" class="form-control" placeholder="Enter sprint id">
+    </div>
+    <div class="form-group">
+      <label>User Id</label>
+      <input #userId type="text" class="form-control" placeholder="Assign for ...">
+    </div>
+    <div class="form-group">
+      <label class="my-1 mr-2">Priority</label>
+      <select class="custom-select my-1 mr-sm-2" [(ngModel)]="selectedPriority" [ngModelOptions]="{standalone: true}">
+        <option [value]="'low'">Low</option>
+        <option [value]="'normal'">Normal</option>
+        <option [value]="'high'">High</option>
+        <option [value]="'urgent'">Urgent</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="my-1 mr-2">Status</label>
+      <select class="custom-select my-1 mr-sm-2" [(ngModel)]="selectedStatus" [ngModelOptions]="{standalone: true}">
+        <option [value]="'New'">New</option>
+        <option [value]="'In progress'">In progress</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input #startTime type="text"
+             placeholder="Start Time"
+             class="form-control"
+             bsDatepicker [bsConfig]="bsConfig">
+    </div>
+    <div class="form-group">
+      <label>Title</label>
+      <input #title type="text" class="form-control" placeholder="Title...">
+    </div>
+    <div class="form-group">
+      <label>Content</label>
+      <textarea #content class="form-control rounded-0" rows="5"></textarea>
+    </div>
+    <button (click)="save(sprintId.value, userId.value, title.value, content.value, startTime.value)" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

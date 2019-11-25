@@ -1,0 +1,7 @@
+<div class="login-wrapper">
+  <h1>Login</h1>
+  <input type="text" placeholder="Username" [(ngModel)]="userName" >
+  <input type="text" placeholder="Password" [(ngModel)]="pwd" >
+  <input type="submit" (click)="checkAccount()" value="Login" >
+  <p *ngIf="isError" class="message">{{errorMessage}}</p>
+</div>

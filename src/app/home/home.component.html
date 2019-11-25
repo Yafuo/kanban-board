@@ -1,0 +1,48 @@
+<div class="container-fluid home-wrapper">
+  <div class="row">
+    <div class="col-6">
+      <div class="row pbl-header">
+        <button (click)="createItem()" class="col-1 btn btn-info"><fa-icon [icon]="faHome"></fa-icon></button>
+        <div class="col-1"></div>
+        <div class="col-10 table-header">Product Back Log</div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row sbl-header">
+        <button class="col-1 btn btn-info" (click)="previous()"><fa-icon [icon]="faChevronLeft"></fa-icon></button>
+        <div class="col-1"></div>
+        <div class="col-8 table-header">Sprint {{sprintId}}</div>
+        <div class="col-1"></div>
+        <button class="col-1 btn btn-info" (click)="next()"><fa-icon [icon]="faChevronRight"></fa-icon></button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="sprint-list" *ngFor="let sprint of sbl">
+        <div class="sprint-title">Sprint {{sprint.sprintId}}</div>
+        <div class="pbl-body {{item.priority}}" *ngFor="let item of sprint.items">
+          <div class="row" *ngIf="item.status !== 'In progress'">
+            <div class="col-1 priority">{{item.priority | uppercase}}</div>
+            <div [ngClass]="account.level === 'PO' ? 'col-8' : 'col-11'" class="title">{{item.title}}</div>
+            <button *ngIf="account.level === 'PO'" (click)="edit(item, 1)" class="col-1 btn btn-dark"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            <div class="col-1"></div>
+            <button *ngIf="account.level === 'PO'" (click)="deleteItem(item)" class="col-1 btn btn-dark"><i class="fa fa-times" aria-hidden="true"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="sbl-body" *ngFor="let item of sbl[sprintId-1].items">
+        <div class="row" *ngIf="item.status === 'In progress'">
+          <div class="col-1 priority {{item.priority}}">{{item.priority | uppercase}}</div>
+          <div class="col-8 title {{item.priority}}" (click)="edit(item, 2)">{{item.title}}</div>
+          <select class="col-3 btn-outline-info" [(ngModel)]="item.status">
+            <option [value]="'In progress'">In progress</option>
+            <option [value]="'Done'">Done</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
